@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santiago Alexis Betancur | M365 & Power Platform Specialist</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --bg: #0a192f;
+    --text: #ccd6f6;
+    --accent: #64ffda;
+    --secondary: #8892b0;
+    --card-bg: #112240;
+    --card-border: #233554;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 24px;
+    left: 40px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 22px;
+    transition: 0.3s ease;
+    z-index: 100;
+}
+.logo svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    filter: drop-shadow(0 0 6px var(--accent)) drop-shadow(0 0 12px var(--accent));
+}
+.logo svg polygon { fill: none; stroke: var(--accent); stroke-width: 2; }
+.logo span { position: relative; z-index: 1; text-shadow: 0 0 8px var(--accent); }
+.logo:hover { transform: scale(1.08); }
+
+/* PARTICLES */
+.particles {
+    position: fixed;
+    width: 100%; height: 100%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(100,255,218,0.05), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(100,255,218,0.05), transparent 40%);
+    animation: moveBg 18s infinite alternate ease-in-out;
+    z-index: -1;
+}
+@keyframes moveBg {
+    from { transform: translateY(0px); }
+    to   { transform: translateY(-25px); }
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px 80px;
+    font-size: 14px;
+    font-family: 'Fira Code', monospace;
+}
+nav a { margin-left: 30px; text-decoration: none; color: var(--text); transition: 0.3s ease; }
+nav a:hover { color: var(--accent); }
+nav a .num { color: var(--accent); }
+
+/* HERO */
+.hero {
+    max-width: 1000px;
+    margin: 120px auto 160px;
+    padding: 0 40px;
+}
+.small-text {
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-family: 'Fira Code', monospace;
+    font-size: 15px;
+}
+.typing {
+    font-size: 58px;
+    font-weight: 800;
+    margin: 0;
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid var(--accent);
+    white-space: nowrap;
+    width: 0;
+    animation: typing 2.2s steps(26, end) forwards;
+    letter-spacing: -1px;
+}
+@keyframes typing {
+    from { width: 0 }
+    to   { width: 100% }
+}
+.typing.finished { border-right: none; }
+.hero p {
+    max-width: 620px;
+    margin-top: 28px;
+    color: var(--secondary);
+    line-height: 1.7;
+    font-size: 16px;
+}
+.hero-btns {
+    display: flex;
+    gap: 16px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+}
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Fira Code', monospace;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+.btn-primary:hover {
+    background: rgba(100,255,218,0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(100,255,218,0.15);
+}
+
+/* SECTIONS */
+.section {
+    max-width: 900px;
+    margin: 0 auto 130px;
+    padding: 0 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 50px;
+    white-space: nowrap;
+    font-family: 'Fira Code', monospace;
+}
+.section-title .num { color: var(--accent); font-size: 16px; font-weight: 400; }
+.section-title::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--card-border);
+}
+
+/* ABOUT */
+.about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 60px;
+    align-items: start;
+}
+.about-text p { color: var(--secondary); line-height: 1.8; font-size: 16px; margin-bottom: 16px; }
+.about-text p span { color: var(--accent); }
+
+.skills-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    margin-top: 24px;
+    padding: 0;
+    list-style: none;
+}
+.skills-list li {
+    color: var(--secondary);
+    font-size: 13px;
+    font-family: 'Fira Code', monospace;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.skills-list li::before { content: "▹"; color: var(--accent); flex-shrink: 0; }
+
+.about-photo { display: flex; justify-content: center; }
+.photo-wrapper { position: relative; width: 260px; height: 280px; }
+.photo-placeholder {
+    width: 100%; height: 100%;
+    border-radius: 4px;
+    background: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--secondary);
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+.photo-placeholder i { font-size: 48px; color: var(--accent); opacity: 0.4; }
+.photo-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 14px; left: 14px;
+    width: 100%; height: 100%;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    z-index: 0;
+    transition: 0.3s ease;
+}
+.photo-wrapper:hover::after { top: 10px; left: 10px; }
+
+.certs { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
+.cert-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-size: 13px;
+    color: var(--secondary);
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-family: 'Fira Code', monospace;
+}
+.cert-badge i { color: var(--accent); font-size: 15px; }
+.cert-badge:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* EXPERIENCE */
+.exp-container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    min-height: 320px;
+}
+.exp-tabs {
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid var(--card-border);
+}
+.exp-tab {
+    padding: 14px 20px;
+    cursor: pointer;
+    color: var(--secondary);
+    font-size: 13px;
+    font-family: 'Fira Code', monospace;
+    border-left: 2px solid transparent;
+    margin-left: -2px;
+    transition: 0.2s ease;
+    background: transparent;
+    border-top: none; border-right: none; border-bottom: none;
+    text-align: left;
+    white-space: nowrap;
+}
+.exp-tab:hover { color: var(--accent); background: rgba(100,255,218,0.04); }
+.exp-tab.active { color: var(--accent); border-left-color: var(--accent); background: rgba(100,255,218,0.06); }
+
+.exp-panels { padding: 4px 0 4px 36px; }
+.exp-panel { display: none; }
+.exp-panel.active { display: block; }
+.exp-panel h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 0 0 4px; }
+.exp-panel h3 span { color: var(--accent); }
+.exp-panel .exp-date {
+    font-size: 13px;
+    font-family: 'Fira Code', monospace;
+    color: var(--secondary);
+    margin-bottom: 20px;
+}
+.exp-panel ul { list-style: none; padding: 0; margin: 0; }
+.exp-panel ul li {
+    color: var(--secondary);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+.exp-panel ul li::before { content: "▹"; color: var(--accent); position: absolute; left: 0; }
+
+/* PROJECTS */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+.project-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.project-card:hover::before { transform: scaleX(1); }
+.project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+.project-top i.folder { font-size: 36px; color: var(--accent); }
+.project-links a { color: var(--secondary); font-size: 16px; margin-left: 12px; transition: 0.2s ease; }
+.project-links a:hover { color: var(--accent); }
+.project-card h3 { font-size: 17px; font-weight: 600; color: var(--text); margin: 0 0 10px; }
+.project-card p { color: var(--secondary); font-size: 14px; line-height: 1.7; margin: 0; flex-grow: 1; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.project-tags span { font-size: 12px; font-family: 'Fira Code', monospace; color: var(--secondary); }
+
+/* CERTIFICATIONS */
+.certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+.cert-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+.cert-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.cert-card .cert-icon {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(100,255,218,0.08);
+    border-radius: 4px;
+    color: var(--accent);
+    font-size: 18px;
+}
+.cert-card-info { flex: 1; }
+.cert-card-info h4 { font-size: 14px; font-weight: 600; color: var(--text); margin: 0 0 4px; line-height: 1.4; }
+.cert-card-info span { font-size: 12px; font-family: 'Fira Code', monospace; color: var(--secondary); }
+
+/* CONTACT */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+.contact-left .availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(100,255,218,0.06);
+    border: 1px solid rgba(100,255,218,0.2);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-family: 'Fira Code', monospace;
+    color: var(--accent);
+    margin-bottom: 24px;
+}
+.dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--accent);
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+}
+.contact-left h3 { font-size: 28px; font-weight: 700; color: var(--text); margin: 0 0 16px; line-height: 1.3; }
+.contact-left h3 span { color: var(--accent); }
+.contact-left p { color: var(--secondary); font-size: 15px; line-height: 1.7; margin: 0 0 28px; }
+.contact-left .response-time { font-size: 13px; font-family: 'Fira Code', monospace; color: var(--secondary); margin-top: 16px; }
+.contact-left .response-time i { color: var(--accent); margin-right: 6px; }
+
+.btn-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Fira Code', monospace;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+.btn-cv:hover { background: rgba(100,255,218,0.08); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(100,255,218,0.15); }
+
+.contact-links { display: flex; flex-direction: column; gap: 14px; }
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: 0.3s ease;
+}
+.contact-item:hover { border-color: var(--accent); transform: translateX(6px); }
+.contact-item:hover .contact-icon { color: var(--accent); }
+.contact-icon { font-size: 18px; color: var(--secondary); width: 24px; text-align: center; transition: 0.3s ease; flex-shrink: 0; }
+.contact-info { display: flex; flex-direction: column; gap: 2px; }
+.contact-label { font-size: 11px; font-family: 'Fira Code', monospace; color: var(--secondary); text-transform: uppercase; letter-spacing: 1px; }
+.contact-value { font-size: 14px; color: var(--text); }
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--secondary);
+    font-size: 13px;
+    font-family: 'Fira Code', monospace;
+    border-top: 1px solid var(--card-border);
+    margin-top: 40px;
+}
+.footer span { color: var(--accent); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .logo { left: 20px; }
+    nav { justify-content: center; padding: 20px; font-size: 11px; flex-wrap: wrap; gap: 6px; }
+    nav a { margin-left: 10px; }
+    .hero { margin: 80px auto 100px; padding: 0 24px; }
+    .typing { font-size: 30px; }
+    .hero p { font-size: 14px; }
+    .section { padding: 0 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-photo { order: -1; }
+    .photo-wrapper { width: 200px; height: 220px; }
+    .exp-container { grid-template-columns: 1fr; }
+    .exp-tabs { flex-direction: row; border-left: none; border-bottom: 2px solid var(--card-border); overflow-x: auto; }
+    .exp-tab { border-left: none; border-bottom: 2px solid transparent; margin-left: 0; margin-bottom: -2px; padding: 10px 14px; }
+    .exp-tab.active { border-bottom-color: var(--accent); border-left-color: transparent; }
+    .exp-panels { padding: 24px 0 0; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    .certs-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="particles"></div>
+
+<!-- LOGO -->
+<div class="logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 96,27 96,73 50,96 4,73 4,27"/>
+    </svg>
+    <span>S</span>
+</div>
+
+<!-- NAV -->
+<nav>
+    <a href="#about"><span class="num">01.</span> About</a>
+    <a href="#experience"><span class="num">02.</span> Experience</a>
+    <a href="#projects"><span class="num">03.</span> Projects</a>
+    <a href="#certifications"><span class="num">04.</span> Certifications</a>
+    <a href="#contact"><span class="num">05.</span> Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="small-text">Hi, my name is</div>
+    <h1 class="typing">Santiago Alexis Betancur</h1>
+    <p>
+        Microsoft 365 Consultant & Power Platform Specialist based in Vancouver, BC.
+        I help organizations modernize their digital workplace through cloud adoption,
+        automation, and governance — turning complex technology into real business value.
+    </p>
+    <div class="hero-btns">
+        <a class="btn-primary" href="#contact">
+            <i class="fas fa-paper-plane"></i> Get In Touch
+        </a>
+        <a class="btn-primary" href="cv-santiago-betancur.pdf" download>
+            <i class="fas fa-download"></i> Download CV
+        </a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+    <h2 class="section-title"><span class="num">01.</span> About Me</h2>
+    <div class="about-grid">
+        <div class="about-text">
+            <p>
+                Hello! I'm Santiago, a <span>Microsoft 365 Consultant</span> currently based in
+                Vancouver, BC. I specialize in cloud modernization, identity management, and digital
+                workplace adoption across Microsoft 365 and Azure environments.
+            </p>
+            <p>
+                With experience spanning enterprise client portfolios in Colombia to hands-on consulting
+                in Vancouver, I bridge the gap between <span>technical infrastructure</span> and the
+                people who use it — delivering training, governance frameworks, automation solutions,
+                and user enablement that actually stick.
+            </p>
+            <p>
+                I'm currently pursuing a <span>Diploma in Information Technology</span> at Canadian
+                College in Vancouver while working as a Junior M365 Consultant at Inside View Global.
+                Here are some of the technologies I work with:
+            </p>
+            <ul class="skills-list">
+                <li>Microsoft 365 Admin</li>
+                <li>Power Automate</li>
+                <li>SharePoint Online</li>
+                <li>Power Apps</li>
+                <li>Entra ID (Azure AD)</li>
+                <li>Power BI</li>
+                <li>Microsoft Teams</li>
+                <li>Copilot Studio</li>
+                <li>Microsoft Defender</li>
+                <li>Exchange Online</li>
+                <li>Azure Fundamentals</li>
+                <li>DLP & Compliance</li>
+            </ul>
+            <div class="certs">
+                <a class="cert-badge" href="https://learn.microsoft.com/en-us/users/santiagoalexisbetancuraguirre-3476/transcript/d844wh4g0wqrl5m?tab=credentials-tab" target="_blank">
+                    <i class="fab fa-microsoft"></i> Microsoft Certifications
+                </a>
+                <a class="cert-badge" href="https://www.linkedin.com/in/salexisbetan" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a class="cert-badge" href="https://github.com/santiagoalexisbetancur" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+        <div class="about-photo">
+            <div class="photo-wrapper">
+                <div class="photo-placeholder">
+                    <i class="fas fa-user"></i>
+                    <span>Your photo here</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+    <h2 class="section-title"><span class="num">02.</span> Experience</h2>
+    <div class="exp-container">
+        <div class="exp-tabs">
+            <button class="exp-tab active" data-panel="job1">Inside View</button>
+            <button class="exp-tab" data-panel="job2">Controles Emp.</button>
+        </div>
+        <div class="exp-panels">
+
+            <div class="exp-panel active" id="job1">
+                <h3>Microsoft 365 Consultant (Junior) <span>@ Inside View Global</span></h3>
+                <p class="exp-date">January 2026 — Present · Vancouver, BC</p>
+                <ul>
+                    <li>Support configuration, baseline administration, and operational maintenance of Microsoft 365 workloads including SharePoint Online, Teams, OneDrive for Business, and Power Platform components.</li>
+                    <li>Troubleshoot user and configuration issues (permissions, access, sync, Teams collaboration, workflow errors) and escalate advanced incidents following established escalation paths.</li>
+                    <li>Work alongside senior consultants, developers, and solution architects to interpret business requirements and support delivery of Microsoft 365 and Modern Workplace solutions.</li>
+                    <li>Deliver training, onboarding assistance, and user enablement for Microsoft 365 tools across client organizations.</li>
+                    <li>Produce and maintain documentation, how-to guides, and SOPs; gather user feedback to support continuous improvement.</li>
+                    <li>Assist with product demos, technical documentation, and preliminary effort estimates for M365-related opportunities.</li>
+                </ul>
+            </div>
+
+            <div class="exp-panel" id="job2">
+                <h3>Pre-Sales & Microsoft Adoption Engineer <span>@ Controles Empresariales</span></h3>
+                <p class="exp-date">March 2023 — February 2024 · Colombia</p>
+                <ul>
+                    <li>Managed a portfolio of 60+ enterprise and SMB client tenants, driving cloud modernization and productivity enhancements across Microsoft 365 and Azure — projects exceeding $1M+ in total contract value.</li>
+                    <li>Provided Tier 2/Tier 3 technical support including user lifecycle management, identity and access configuration (Entra ID, conditional access), license governance, and tenant-wide configuration.</li>
+                    <li>Administered Microsoft licensing across CSP, MPSA, VLSC, and Azure EA/MCA portals, ensuring accurate provisioning, SKU optimization, and cost-efficient subscription utilization.</li>
+                    <li>Collaborated with solution architects and sales teams to design and deliver Microsoft 365 E5 security, Defender suite integrations, and Azure AD P1/P2 identity solutions.</li>
+                    <li>Delivered technical enablement sessions covering M365 security fundamentals, Teams/SharePoint/OneDrive, conditional access, DLP, and Microsoft Secure Score best practices.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+    <h2 class="section-title"><span class="num">03.</span> Projects</h2>
+    <div class="projects-grid">
+
+        <div class="project-card">
+            <div class="project-top">
+                <i class="fas fa-folder-open folder"></i>
+                <div class="project-links">
+                    <a href="#" title="View project"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <h3>Vancouver M365 Summit – Technical Coordination</h3>
+            <p>Regional Microsoft-focused summit hosting 150+ professionals, speakers, and sponsors. Led technical session readiness, AV configuration, room allocation, volunteer coordination, and end-to-end logistics for all Microsoft 365 presentations and demo environments.</p>
+            <div class="project-tags">
+                <span>Event Management</span>
+                <span>M365</span>
+                <span>Coordination</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-top">
+                <i class="fas fa-folder-open folder"></i>
+                <div class="project-links">
+                    <a href="#" title="View project"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <h3>Vankono & Hubernyx – QA Testing</h3>
+            <p>Quality assurance initiative for web and web-app environments. Executed structured test cases, logged bugs and UI inconsistencies, collaborated with dev and UX teams, and produced technical walkthroughs and instructional videos to support user onboarding.</p>
+            <div class="project-tags">
+                <span>QA Testing</span>
+                <span>UI/UX</span>
+                <span>Documentation</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-top">
+                <i class="fas fa-folder-open folder"></i>
+                <div class="project-links">
+                    <a href="#" title="View project"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <h3>Enterprise M365 Tenant Governance</h3>
+            <p>Designed and implemented governance frameworks for 60+ enterprise tenants covering Teams policies, SharePoint architecture, naming conventions, lifecycle management, and conditional access baselines aligned with Microsoft security best practices.</p>
+            <div class="project-tags">
+                <span>SharePoint</span>
+                <span>Teams</span>
+                <span>Entra ID</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-top">
+                <i class="fas fa-folder-open folder"></i>
+                <div class="project-links">
+                    <a href="#" title="View project"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <h3>CSP License Optimization Program</h3>
+            <p>Administered and optimized Microsoft licensing across CSP, MPSA, VLSC, and Azure EA/MCA portals for a multi-client portfolio. Achieved cost-efficient SKU allocation and ensured full compliance with Microsoft licensing terms.</p>
+            <div class="project-tags">
+                <span>CSP</span>
+                <span>Azure EA</span>
+                <span>License Governance</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+    <h2 class="section-title"><span class="num">04.</span> Certifications</h2>
+    <div class="certs-grid">
+
+        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/santiagoalexisbetancuraguirre-3476/transcript/d844wh4g0wqrl5m?tab=credentials-tab" target="_blank">
+            <div class="cert-icon"><i class="fab fa-microsoft"></i></div>
+            <div class="cert-card-info">
+                <h4>Azure Fundamentals (AZ-900)</h4>
+                <span>Microsoft · September 2025</span>
+            </div>
+        </a>
+
+        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/santiagoalexisbetancuraguirre-3476/transcript/d844wh4g0wqrl5m?tab=credentials-tab" target="_blank">
+            <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="cert-card-info">
+                <h4>Security, Compliance & Identity (SC-900)</h4>
+                <span>Microsoft · September 2025</span>
+            </div>
+        </a>
+
+        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/santiagoalexisbetancuraguirre-3476/transcript/d844wh4g0wqrl5m?tab=credentials-tab" target="_blank">
+            <div class="cert-icon"><i class="fas fa-brain"></i></div>
+            <div class="cert-card-info">
+                <h4>Azure AI Fundamentals (AI-900)</h4>
+                <span>Microsoft · May 2024</span>
+            </div>
+        </a>
+
+        <a class="cert-card" href="https://www.linkedin.com/learning/certificates/c8fa14265267bcea7d50ab5af2639aa258ad1ae4409aadf6b44390700abe171c?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BUxy01AZSSTizFufyj7uHlg%3D%3D" target="_blank">
+            <div class="cert-icon"><i class="fas fa-robot"></i></div>
+            <div class="cert-card-info">
+                <h4>Professional Fundamentals of Generative AI</h4>
+                <span>Microsoft & LinkedIn · April 2024</span>
+            </div>
+        </a>
+
+        <a class="cert-card" href="https://credentials.databricks.com/fd1290c4-16a9-413c-b921-7ec8ea4697f5" target="_blank">
+            <div class="cert-icon"><i class="fas fa-fire"></i></div>
+            <div class="cert-card-info">
+                <h4>Generative AI Fundamentals</h4>
+                <span>Databricks · May 2024</span>
+            </div>
+        </a>
+
+        <a class="cert-card" href="https://www.coursera.org/account/accomplishments/verify/PPPFGFZNHQDK" target="_blank">
+            <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="cert-card-info">
+                <h4>Business Analysis & Process Management</h4>
+                <span>Coursera · April 2024</span>
+            </div>
+        </a>
+
+        <a class="cert-card" href="#" target="_blank">
+            <div class="cert-icon"><i class="fab fa-microsoft"></i></div>
+            <div class="cert-card-info">
+                <h4>M365 Services Management & Productivity Tools</h4>
+                <span>SENA · December 2023</span>
+            </div>
+        </a>
+
+        <a class="cert-card" href="https://www.linkedin.com/learning/certificates/02a326d4282f307c2cf7c2e82a4bce802b2b90e7435dd4746d8587332cdf8441?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BUxy01AZSSTizFufyj7uHlg%3D%3D" target="_blank">
+            <div class="cert-icon"><i class="fab fa-linkedin"></i></div>
+            <div class="cert-card-info">
+                <h4>Artificial Intelligence for Business</h4>
+                <span>LinkedIn · April 2024</span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+    <h2 class="section-title"><span class="num">05.</span> Contact</h2>
+    <div class="contact-wrapper">
+
+        <div class="contact-left">
+            <div class="availability">
+                <span class="dot"></span>
+                Open to opportunities
+            </div>
+            <h3>Have a project in mind?<br><span>Let's talk.</span></h3>
+            <p>
+                Whether it's a Microsoft 365 implementation, a Power Platform solution,
+                or a conversation about modern workplace strategy — my inbox is always open.
+            </p>
+            <a class="btn-cv" href="cv-santiago-betancur.pdf" download>
+                <i class="fas fa-download"></i> Download CV
+            </a>
+            <p class="response-time">
+                <i class="fas fa-clock"></i> Typically responds within 24 hours
+            </p>
+        </div>
+
+        <div class="contact-links">
+
+            <a class="contact-item" href="mailto:santiago.a.betancur@gmail.com">
+                <i class="fas fa-envelope contact-icon"></i>
+                <div class="contact-info">
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">santiago.a.betancur@gmail.com</span>
+                </div>
+            </a>
+
+            <a class="contact-item" href="tel:+12363339192">
+                <i class="fas fa-phone contact-icon"></i>
+                <div class="contact-info">
+                    <span class="contact-label">Phone</span>
+                    <span class="contact-value">+1 (236) 333 9192</span>
+                </div>
+            </a>
+
+            <a class="contact-item" href="https://github.com/santiagoalexisbetancur" target="_blank">
+                <i class="fab fa-github contact-icon"></i>
+                <div class="contact-info">
+                    <span class="contact-label">GitHub</span>
+                    <span class="contact-value">Santiago Betancur</span>
+                </div>
+            </a>
+
+            <a class="contact-item" href="https://www.linkedin.com/in/salexisbetan" target="_blank">
+                <i class="fab fa-linkedin contact-icon"></i>
+                <div class="contact-info">
+                    <span class="contact-label">LinkedIn</span>
+                    <span class="contact-value">salexisbetan</span>
+                </div>
+            </a>
+
+            <a class="contact-item" href="https://learn.microsoft.com/en-us/users/santiagoalexisbetancuraguirre-3476/transcript/d844wh4g0wqrl5m?tab=credentials-tab" target="_blank">
+                <i class="fab fa-microsoft contact-icon"></i>
+                <div class="contact-info">
+                    <span class="contact-label">Microsoft Learn</span>
+                    <span class="contact-value">View Certifications</span>
+                </div>
+            </a>
+
+            <div class="contact-item" style="cursor:default;">
+                <i class="fas fa-map-marker-alt contact-icon"></i>
+                <div class="contact-info">
+                    <span class="contact-label">Location</span>
+                    <span class="contact-value">Vancouver, BC — Canada</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    Designed & Built by <span>Santiago Alexis Betancur</span> · Vancouver, BC
+</footer>
+
+<script>
+setTimeout(() => {
+    document.querySelector('.typing').classList.add('finished');
+}, 2200);
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.exp-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.exp-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.panel).classList.add('active');
+    });
+});
+</script>
+
+</body>
+</html>
